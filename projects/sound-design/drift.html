@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DRIFT - Lia Aguilar</title>
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <script src="../../js/script.js" defer></script>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Lora:ital,wght@0,400..700;1,400..700&family=Notable&family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Special+Gothic+Expanded+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="content-page">
+    <!-- Floating Hamburger Menu -->
+    <div class="floating-menu">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay">
+      <div class="menu-content">
+        <ul class="menu-links">
+          <li><a href="../../index.html">HOME</a></li>
+          <li><a href="../../about.html">ABOUT</a></li>
+          <li><a href="../../sound-design.html">SOUND DESIGN</a></li>
+          <li><a href="../../interactive-design.html">INTERACTIVE MEDIA</a></li>
+          <li><a href="../../all-works.html">ALL WORKS</a></li>
+          <li><a href="../../contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Back Button -->
+    <button class="back-button">← BACK</button>
+
+    <!-- Project Detail Content -->
+    <div class="content-page">
+      <h1 class="section-title">DRIFT</h1>
+      <div class="project-detail-container">
+        <div class="project-detail-image" style="margin-bottom: 0; position: relative; overflow: hidden;">
+          <div id="drift-container" style="position: relative; width: 100%; height: 100%; background: #1a1a1a; border-radius: 8px;">
+            <canvas
+              id="drift-visualizer"
+              style="width: 100%; height: 100%; display: block; transition: opacity 0.3s ease; cursor: pointer; border-radius: 8px;"
+              onmouseover="this.style.opacity='0.8'" 
+              onmouseout="this.style.opacity='1'"
+            ></canvas>
+            <audio
+              id="drift-audio"
+              style="display: none;"
+            >
+              <source src="../../assets/sound-design/drift.wav" type="audio/wav">
+              Your browser does not support the audio element.
+            </audio>
+            <div id="play-indicator" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 5; pointer-events: none; opacity: 1; transition: opacity 0.3s ease;">
+              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" style="filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));">
+                <path d="M8 5v14l11-7z" fill="#9a9580"/>
+              </svg>
+            </div>
+            <div id="progress-bar-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 60px; background: rgba(26, 26, 26, 0.8); backdrop-filter: blur(10px); z-index: 10; display: flex; align-items: center; padding: 0 20px; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;">
+              <div style="flex: 1; position: relative; height: 4px; background: rgba(154, 149, 128, 0.3); border-radius: 2px; margin: 0 20px; cursor: pointer;" id="progress-track">
+                <div id="progress-bar" style="position: absolute; left: 0; top: 0; height: 100%; background: #9a9580; border-radius: 2px; width: 0%; transition: width 0.1s linear;"></div>
+                <div id="progress-handle" style="position: absolute; left: 0; top: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; background: #9a9580; border-radius: 50%; cursor: grab; opacity: 0; transition: opacity 0.2s ease; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);"></div>
+              </div>
+            </div>
+            <style>
+              #progress-track:hover #progress-handle {
+                opacity: 1 !important;
+              }
+              
+              #progress-handle:active {
+                cursor: grabbing !important;
+              }
+            </style>
+          </div>
+        </div>
+        <script>
+          const audio = document.getElementById('drift-audio');
+          const canvas = document.getElementById('drift-visualizer');
+          const ctx = canvas.getContext('2d');
+          
+          // Set canvas size
+          function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.offsetWidth;
+            canvas.height = container.offsetHeight;
+          }
+          resizeCanvas();
+          window.addEventListener('resize', resizeCanvas);
+          
+          // Audio context setup
+          let audioContext;
+          let analyser;
+          let source;
+          let dataArray;
+          let animationId;
+          
+          function initAudioContext() {
+            if (!audioContext) {
+              audioContext = new (window.AudioContext || window.webkitAudioContext)();
+              analyser = audioContext.createAnalyser();
+              source = audioContext.createMediaElementSource(audio);
+              
+              source.connect(analyser);
+              analyser.connect(audioContext.destination);
+              analyser.fftSize = 256;
+              
+              const bufferLength = analyser.frequencyBinCount;
+              dataArray = new Uint8Array(bufferLength);
+            }
+          }
+          
+          // Visualization function
+          function draw() {
+            if (!analyser || !dataArray) return;
+            
+            animationId = requestAnimationFrame(draw);
+            
+            analyser.getByteFrequencyData(dataArray);
+            
+            // Clear canvas
+            ctx.fillStyle = '#1a1a1a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw waveform bars
+            const barCount = dataArray.length;
+            const barWidth = (canvas.width / barCount) * 2.5;
+            let x = 0;
+            
+            for (let i = 0; i < barCount; i++) {
+              const barHeight = (dataArray[i] / 255) * canvas.height * 0.8;
+              
+              // Create gradient for bars
+              const gradient = ctx.createLinearGradient(0, canvas.height, 0, canvas.height - barHeight);
+              gradient.addColorStop(0, '#9a9580');
+              gradient.addColorStop(0.5, 'rgba(154, 149, 128, 0.7)');
+              gradient.addColorStop(1, 'rgba(154, 149, 128, 0.3)');
+              
+              ctx.fillStyle = gradient;
+              ctx.fillRect(x, canvas.height - barHeight, barWidth - 1, barHeight);
+              
+              x += barWidth;
+            }
+            
+            // Draw center line
+            ctx.strokeStyle = 'rgba(154, 149, 128, 0.2)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height / 2);
+            ctx.lineTo(canvas.width, canvas.height / 2);
+            ctx.stroke();
+          }
+          
+          // Show/hide controls functionality
+          let controlsTimeout;
+          const container = document.getElementById('drift-container');
+          const playIndicator = document.getElementById('play-indicator');
+          const progressContainer = document.getElementById('progress-bar-container');
+          const progressBar = document.getElementById('progress-bar');
+          const progressHandle = document.getElementById('progress-handle');
+          const progressTrack = document.getElementById('progress-track');
+          
+          function showControls() {
+            progressContainer.style.opacity = '1';
+            progressContainer.style.pointerEvents = 'auto';
+            clearTimeout(controlsTimeout);
+          }
+          
+          function hideControls() {
+            if (!audio.paused) {
+              // Keep visible while playing, but hide after 3 seconds of no interaction
+              controlsTimeout = setTimeout(() => {
+                if (!container.matches(':hover')) {
+                  progressContainer.style.opacity = '0';
+                  progressContainer.style.pointerEvents = 'none';
+                }
+              }, 3000);
+            } else {
+              // Hide immediately when paused and not hovering
+              if (!container.matches(':hover')) {
+                progressContainer.style.opacity = '0';
+                progressContainer.style.pointerEvents = 'none';
+              }
+            }
+          }
+          
+          // Update progress bar
+          function updateProgress() {
+            if (audio.duration) {
+              const percent = (audio.currentTime / audio.duration) * 100;
+              progressBar.style.width = percent + '%';
+              progressHandle.style.left = percent + '%';
+            }
+          }
+          
+          // Seek to position
+          function seekTo(e) {
+            const rect = progressTrack.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+            if (audio.duration) {
+              audio.currentTime = (percent / 100) * audio.duration;
+            }
+          }
+          
+          // Progress bar interaction
+          let isDragging = false;
+          
+          progressTrack.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            seekTo(e);
+            showControls();
+          });
+          
+          document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+              seekTo(e);
+            }
+          });
+          
+          document.addEventListener('mouseup', () => {
+            isDragging = false;
+          });
+          
+          progressTrack.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!isDragging) {
+              seekTo(e);
+            }
+          });
+          
+          // Prevent progress bar clicks from triggering canvas
+          progressContainer.addEventListener('click', (e) => {
+            e.stopPropagation();
+          });
+          
+          // Update progress on timeupdate
+          audio.addEventListener('timeupdate', updateProgress);
+          
+          function updatePlayIndicator() {
+            if (audio.paused) {
+              playIndicator.style.opacity = '1';
+            } else {
+              playIndicator.style.opacity = '0';
+            }
+          }
+          
+          // Start visualization when audio plays
+          audio.addEventListener('play', () => {
+            initAudioContext();
+            if (!animationId) {
+              draw();
+            }
+            showControls();
+            updatePlayIndicator();
+          });
+          
+          // Stop visualization when audio pauses
+          audio.addEventListener('pause', () => {
+            if (animationId) {
+              cancelAnimationFrame(animationId);
+              animationId = null;
+            }
+            // Clear canvas when paused
+            ctx.fillStyle = '#1a1a1a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // Hide controls when paused
+            clearTimeout(controlsTimeout);
+            hideControls();
+            // Show play indicator when paused
+            updatePlayIndicator();
+          });
+          
+          // Hide indicator on hover (progress bar will show instead)
+          container.addEventListener('mouseenter', () => {
+            showControls();
+            if (audio.paused) {
+              playIndicator.style.opacity = '0.5';
+            }
+          });
+          
+          container.addEventListener('mouseleave', () => {
+            updatePlayIndicator();
+            hideControls();
+          });
+          
+          // Show controls on canvas click and toggle play/pause
+          canvas.addEventListener('click', (e) => {
+            // Don't toggle if clicking on progress bar
+            if (e.target === canvas && !progressContainer.contains(e.target)) {
+              showControls();
+              // Toggle play/pause
+              if (audio.paused) {
+                audio.play();
+              } else {
+                audio.pause();
+              }
+            }
+          });
+          
+          // Keep controls visible when mouse moves over container
+          container.addEventListener('mousemove', showControls);
+          
+          // Initialize with empty canvas
+          ctx.fillStyle = '#1a1a1a';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+        </script>
+        <p style="text-align: left; margin-top: 5px; margin-bottom: 20px; margin-left: 0; font-size: 0.8rem; color: #9a9580; font-family: 'Special Gothic Expanded One', sans-serif; font-style: italic; transform: skew(-5deg); text-transform: uppercase; max-width: 850px; margin-left: auto; margin-right: auto;">LISTEN TO THE STORY HERE</p>
+        
+        <!-- Credits section - FORCE LEFT ALIGNMENT -->
+        <div class="developer-synopsis-container" style="max-width: 1000px; margin: 40px auto; padding: 0 40px; text-align: left !important;">
+          <div class="developer-info" style="display: inline-block; vertical-align: top; width: 300px; margin-right: 40px; text-align: left !important;">
+            <p style="text-align: left !important; margin: 0 0 8px 0;"><span style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580;">Story credits:</span> Gevie Gough</p>
+            <p style="text-align: left !important; margin: 0 0 8px 0;"><span style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580;">Software:</span> Ableton Live 12</p>
+            <p style="text-align: left !important; margin: 0 0 8px 0;"><span style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580;">Format:</span> Original bedtime story</p>
+          </div>
+          
+          <div class="synopsis-info" style="display: inline-block; vertical-align: top; width: 500px; text-align: left !important;">
+            <p style="text-align: left !important; margin: 0;">
+              Drift is an original bedtime soundscape that follows a lost fish and a hungry shark. It is a quiet reflection on fear, instinct, and inevitability. I recorded and produced the full narration, foley and ambient layers, crafting an audio-only story that moves between serenity and tension.
+            </p>
+          </div>
+        </div>
+        
+        <style>
+        @media (max-width: 1000px) {
+          .developer-synopsis-container {
+            display: flex !important;
+            flex-direction: column !important;
+          }
+          .developer-info, .synopsis-info {
+            display: block !important;
+            width: 100% !important;
+            margin-right: 0 !important;
+            vertical-align: top !important;
+          }
+          .synopsis-info {
+            order: 1 !important;
+            margin-bottom: 40px !important;
+          }
+          .developer-info {
+            order: 2 !important;
+            margin-bottom: 0 !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .developer-synopsis-container {
+            display: flex !important;
+            flex-direction: column !important;
+          }
+          .developer-info, .synopsis-info {
+            display: block !important;
+            width: 100% !important;
+            margin-right: 0 !important;
+          }
+          .synopsis-info {
+            order: 1 !important;
+            margin-bottom: 40px !important;
+          }
+          .developer-info {
+            order: 2 !important;
+            margin-bottom: 0 !important;
+          }
+        }
+        </style>
+        
+        <h2 style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580; font-size: 1.5rem; text-align: center; margin: 20px 0 20px 0;">KEY SKILLS</h2>
+        <ul class="key-skills-list" style="text-align: left; max-width: 400px; margin: 0 auto 40px auto; list-style: none; padding-left: 0; margin-bottom: 60px;">
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">Narrative sound design and audio storytelling</li>
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">Foley recording and ambient layering</li>
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">Illustrative sound blending and design</li>
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">Audio reliant narrative story</li>
+        </ul>
+        
+        <style>
+          .key-skills-list li::before {
+            content: "•";
+            color: #9a9580;
+            position: absolute;
+            left: 0;
+          }
+        </style>
+        
+        <div style="width: 90%; height: 1px; background-color: #444; margin: 5px auto 40px auto;"></div>
+        
+        <p style="margin-bottom: 30px;">
+          The piece explores how sound alone can shape emotion and narrative clarity without visuals. Using self-recorded water sounds, low-frequency drones, and layered underwater textures, I built an atmosphere that shifts fluidly between calm and unease. Every sonic element, from the fish's gentle movements to the shark's presence, contributes to a rhythm of inevitability. Drift reflects my interest in using sound as both illustration and emotion, allowing listeners to imagine the story rather than be shown it.
+        </p>
+        
+        <div style="width: 90%; height: 1px; background-color: #444; margin: 20px auto;"></div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RED - Lia Aguilar</title>
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <script src="../../js/script.js" defer></script>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Lora:ital,wght@0,400..700;1,400..700&family=Notable&family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Special+Gothic+Expanded+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="content-page">
+    <!-- Floating Hamburger Menu -->
+    <div class="floating-menu">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay">
+      <div class="menu-content">
+        <ul class="menu-links">
+          <li><a href="../../index.html">HOME</a></li>
+          <li><a href="../../about.html">ABOUT</a></li>
+          <li><a href="../../sound-design.html">SOUND DESIGN</a></li>
+          <li><a href="../../interactive-design.html">INTERACTIVE MEDIA</a></li>
+          <li><a href="../../all-works.html">ALL WORKS</a></li>
+          <li><a href="../../contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Back Button -->
+    <button class="back-button">← BACK</button>
+
+    <!-- Project Detail Content -->
+    <div class="content-page">
+      <h1 class="section-title">RED</h1>
+      <div class="project-detail-container">
+        <div class="project-detail-image" style="margin-bottom: 0; position: relative; overflow: hidden;">
+          <div style="position: relative; width: 100%; height: 100%;">
+            <a href="#" target="_blank" style="display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
+              <video
+                id="red-video"
+                controls
+                style="transition: opacity 0.3s ease; width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 8px;"
+                onmouseover="this.style.opacity='0.8'" 
+                onmouseout="this.style.opacity='1'"
+              >
+                <source src="../../assets/sound-design/RED.mp4" type="video/mp4">
+                Your browser does not support the video element.
+              </video>
+            </a>
+            <div id="red-fallback" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #1a1a1a; padding: 40px; text-align: center; color: #f0f0f0; flex-direction: column; justify-content: center; align-items: center; z-index: 2;">
+              <p style="margin-bottom: 20px; font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580; font-size: 1.2rem;">Sorry! Something went wrong with loading!</p>
+              <p id="red-link" style="color: #f0f0f0; font-size: 1.1rem; font-family: 'Special Gothic Expanded One', sans-serif; text-decoration: underline; transition: color 0.3s ease;">CLICK HERE TO OPEN RED IN A NEW TAB</p>
+            </div>
+            <style>
+              #red-link:hover {
+                color: #9a9580 !important;
+              }
+            </style>
+          </div>
+        </div>
+        <script>
+          const redVideo = document.getElementById('red-video');
+          const redFallback = document.getElementById('red-fallback');
+          
+          redVideo.addEventListener('error', () => {
+            redVideo.style.display = 'none';
+            redFallback.style.display = 'flex';
+          });
+          
+          redVideo.addEventListener('loadeddata', () => {
+            redFallback.style.display = 'none';
+          });
+        </script>
+        <p style="text-align: left; margin-top: 5px; margin-bottom: 20px; margin-left: 0; font-size: 0.8rem; color: #9a9580; font-family: 'Special Gothic Expanded One', sans-serif; font-style: italic; transform: skew(-5deg); text-transform: uppercase; max-width: 850px; margin-left: auto; margin-right: auto;">WATCH THE FULL ANIMATION HERE!</p>
+        
+        <!-- Credits section - FORCE LEFT ALIGNMENT -->
+        <div class="developer-synopsis-container" style="max-width: 1000px; margin: 40px auto; padding: 0 40px; text-align: left !important;">
+          <div class="developer-info" style="display: inline-block; vertical-align: top; width: 300px; margin-right: 40px; text-align: left !important;">
+            <p style="text-align: left !important; margin: 0 0 8px 0;"><span style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580;">Video credits:</span> Jorge Jaramillo and Carlo Guillot</p>
+            <p style="text-align: left !important; margin: 0 0 8px 0;"><span style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580;">Audio Workstation:</span> Ableton Live 12</p>
+          </div>
+          
+          <div class="synopsis-info" style="display: inline-block; vertical-align: top; width: 500px; text-align: left !important;">
+            <p style="text-align: left !important; margin: 0;">
+              The original video 'Red' is a reimagining of Little Red Riding Hood as a violent horror short, made by Jorge Jaramillo and Carlo Guillot. The film's chaotic energy and shifting perspectives offered an opportunity to design a visceral, cinematic sound world that amplifies dread and tension.
+            </p>
+          </div>
+        </div>
+        
+        <style>
+        @media (max-width: 1000px) {
+          .developer-synopsis-container {
+            display: flex !important;
+            flex-direction: column !important;
+          }
+          .developer-info, .synopsis-info {
+            display: block !important;
+            width: 100% !important;
+            margin-right: 0 !important;
+            vertical-align: top !important;
+          }
+          .synopsis-info {
+            order: 1 !important;
+            margin-bottom: 40px !important;
+          }
+          .developer-info {
+            order: 2 !important;
+            margin-bottom: 0 !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .developer-synopsis-container {
+            display: flex !important;
+            flex-direction: column !important;
+          }
+          .developer-info, .synopsis-info {
+            display: block !important;
+            width: 100% !important;
+            margin-right: 0 !important;
+          }
+          .synopsis-info {
+            order: 1 !important;
+            margin-bottom: 40px !important;
+          }
+          .developer-info {
+            order: 2 !important;
+            margin-bottom: 0 !important;
+          }
+        }
+        </style>
+        
+        <h2 style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580; font-size: 1.5rem; text-align: center; margin: 20px 0 20px 0;">KEY SKILLS</h2>
+        <ul class="key-skills-list" style="text-align: left; max-width: 400px; margin: 0 auto 40px auto; list-style: none; padding-left: 0; margin-bottom: 60px;">
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">Foley recording, editing and layering</li>
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">Ambience design & environmental worldbuilding</li>
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">Sound-image synchronization and narrative pacing</li>
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">FX editing for horror mixing</li>
+        </ul>
+        
+        <style>
+          .key-skills-list li::before {
+            content: "•";
+            color: #9a9580;
+            position: absolute;
+            left: 0;
+          }
+        </style>
+        
+        <div style="width: 90%; height: 1px; background-color: #444; margin: 5px auto 40px auto;"></div>
+        
+        <p style="margin-bottom: 30px;">
+          I was responsible for the entire <strong>sound design</strong> and <strong>mix</strong>, building every foley element and atmospheric layer. My approach focused on psychological unease rather than complete realism by building anticipation through silence, drones and distorted textures. The result is a haunting immersive soundscape that mirrors the film's intensity and emotional tone.
+        </p>
+        
+        <div style="width: 90%; height: 1px; background-color: #444; margin: 20px auto;"></div>
+      </div>
+    </div>
+  </body>
+</html>

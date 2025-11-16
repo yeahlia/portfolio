@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fired Before Hired - Lia Aguilar</title>
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <script src="../../js/script.js" defer></script>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Lora:ital,wght@0,400..700;1,400..700&family=Notable&family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Special+Gothic+Expanded+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="content-page">
+    <!-- Floating Hamburger Menu -->
+    <div class="floating-menu">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay">
+      <div class="menu-content">
+        <ul class="menu-links">
+          <li><a href="../../index.html">HOME</a></li>
+          <li><a href="../../about.html">ABOUT</a></li>
+          <li><a href="../../sound-design.html">SOUND DESIGN</a></li>
+          <li><a href="../../interactive-design.html">INTERACTIVE MEDIA</a></li>
+          <li><a href="../../all-works.html">ALL WORKS</a></li>
+          <li><a href="../../contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Back Button -->
+    <button class="back-button">← BACK</button>
+
+    <!-- Project Detail Content -->
+    <div class="content-page">
+      <h1 class="section-title">FIRED BEFORE HIRED</h1>
+      <div class="project-detail-container">
+        <div class="project-detail-image" style="margin-bottom: 0; overflow: hidden;">
+          <a href="https://sekrets.itch.io/fired-before-hired" target="_blank" style="display: block;">
+            <img
+              src="../../assets/fbh.png"
+              style="transition: opacity 0.3s ease; border-radius: 8px; width: 100%; height: 100%; object-fit: cover;"
+              onmouseover="this.style.opacity='0.8'" 
+              onmouseout="this.style.opacity='1'"
+            />
+          </a>
+        </div>
+        <p style="text-align: left; margin-top: 5px; margin-bottom: 20px; margin-left: 0; font-size: 0.8rem; color: #9a9580; font-family: 'Special Gothic Expanded One', sans-serif; font-style: italic; transform: skew(-5deg); text-transform: uppercase; max-width: 850px; margin-left: auto; margin-right: auto;">CLICK IMAGE TO PLAY THE GAME!</p>
+        
+        <!-- Developer section - FORCE LEFT ALIGNMENT -->
+        <div class="developer-synopsis-container" style="max-width: 1000px; margin: 40px auto; padding: 0 40px; text-align: left !important;">
+          <div class="developer-info" style="display: inline-block; vertical-align: top; width: 300px; margin-right: 40px; text-align: left !important;">
+            <p style="text-align: left !important; margin: 0 0 8px 0;"><span style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580;">Developer:</span> PRZ Games</p>
+            <p style="text-align: left !important; margin: 0 0 8px 0;"><span style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580;">Game Engine:</span> Unity</p>
+            <p style="text-align: left !important; margin: 0 0 8px 0;"><span style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580;">Audio Workstation:</span> Ableton and Unity</p>
+          </div>
+          
+          <div class="synopsis-info" style="display: inline-block; vertical-align: top; width: 500px; text-align: left !important;">
+            <p style="text-align: left !important; margin: 0;">
+              Fired Before Hired is a satirical, office-themed action game where I led the complete <strong>sound design</strong>, <strong>music composition</strong> and <strong>Unity audio implementation</strong>.
+            </p>
+          </div>
+        </div>
+        
+        <style>
+        @media (max-width: 1000px) {
+          .developer-synopsis-container {
+            display: flex !important;
+            flex-direction: column !important;
+          }
+          .developer-info, .synopsis-info {
+            display: block !important;
+            width: 100% !important;
+            margin-right: 0 !important;
+            vertical-align: top !important;
+          }
+          .synopsis-info {
+            order: 1 !important;
+            margin-bottom: 40px !important;
+          }
+          .developer-info {
+            order: 2 !important;
+            margin-bottom: 0 !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .developer-synopsis-container {
+            display: flex !important;
+            flex-direction: column !important;
+          }
+          .developer-info, .synopsis-info {
+            display: block !important;
+            width: 100% !important;
+            margin-right: 0 !important;
+          }
+          .synopsis-info {
+            order: 1 !important;
+            margin-bottom: 40px !important;
+          }
+          .developer-info {
+            order: 2 !important;
+            margin-bottom: 0 !important;
+          }
+        }
+        </style>
+        
+        <h2 style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580; font-size: 1.5rem; text-align: center; margin: 20px 0 20px 0;">KEY SKILLS</h2>
+        <ul class="key-skills-list" style="text-align: left; max-width: 400px; margin: 0 auto 40px auto; list-style: none; padding-left: 0; margin-bottom: 60px;">
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">Foley recording, editing and spatial placement</li>
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">Music composition and adaptive looping structures</li>
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">Unity Audio Managers, C# scripting and adaptive mixing</li>
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">Mixing, mastering and in-engine integration</li>
+        </ul>
+        
+        <h2 style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580; font-size: 1.5rem; text-align: center; margin: 40px 0 20px 0;">MENU MUSIC</h2>
+        <div class="audio-player-container" style="max-width: 750px; margin: 0 auto 60px auto; display: flex; align-items: center; gap: 15px; padding: 0 20px;">
+          <button id="menu-play-pause" style="background: #9a9580; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+            <svg id="menu-play-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-left: 2px;">
+              <path d="M8 5v14l11-7z" fill="#1a1a1a"/>
+            </svg>
+            <svg id="menu-pause-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;">
+              <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" fill="#1a1a1a"/>
+            </svg>
+          </button>
+          <div style="flex: 1; position: relative; height: 8px; background: rgba(154, 149, 128, 0.5); border: 1px solid rgba(154, 149, 128, 0.3); border-radius: 4px; cursor: pointer; min-width: 500px;" id="menu-progress-track">
+            <div id="menu-progress-bar" style="position: absolute; left: 0; top: 0; height: 100%; background: #9a9580; border-radius: 3px; width: 0%; transition: width 0.1s linear;"></div>
+            <div id="menu-progress-handle" style="position: absolute; left: 0; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; background: #9a9580; border-radius: 50%; opacity: 0; transition: opacity 0.2s ease; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);"></div>
+          </div>
+          <audio id="menu-audio" style="display: none;">
+            <source src="../../assets/sound-design/FBHmainmenu.wav" type="audio/wav">
+          </audio>
+        </div>
+        
+        <h2 style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580; font-size: 1.5rem; text-align: center; margin: 60px 0 20px 0;">BATTLE MUSIC (WAVE)</h2>
+        <div class="audio-player-container" style="max-width: 750px; margin: 0 auto 80px auto; display: flex; align-items: center; gap: 15px; padding: 0 20px;">
+          <button id="battle-play-pause" style="background: #9a9580; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+            <svg id="battle-play-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-left: 2px;">
+              <path d="M8 5v14l11-7z" fill="#1a1a1a"/>
+            </svg>
+            <svg id="battle-pause-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;">
+              <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" fill="#1a1a1a"/>
+            </svg>
+          </button>
+          <div style="flex: 1; position: relative; height: 8px; background: rgba(154, 149, 128, 0.5); border: 1px solid rgba(154, 149, 128, 0.3); border-radius: 4px; cursor: pointer; min-width: 500px;" id="battle-progress-track">
+            <div id="battle-progress-bar" style="position: absolute; left: 0; top: 0; height: 100%; background: #9a9580; border-radius: 3px; width: 0%; transition: width 0.1s linear;"></div>
+            <div id="battle-progress-handle" style="position: absolute; left: 0; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; background: #9a9580; border-radius: 50%; opacity: 0; transition: opacity 0.2s ease; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);"></div>
+          </div>
+          <audio id="battle-audio" style="display: none;">
+            <source src="../../assets/sound-design/FBHwavemusic.wav" type="audio/wav">
+          </audio>
+        </div>
+        
+        <style>
+          #menu-progress-track:hover #menu-progress-handle,
+          #battle-progress-track:hover #battle-progress-handle {
+            opacity: 1 !important;
+          }
+          
+          @media (max-width: 768px) {
+            #menu-progress-track,
+            #battle-progress-track {
+              min-width: 300px !important;
+            }
+            
+            .audio-player-container {
+              max-width: 100% !important;
+              padding: 0 15px !important;
+            }
+          }
+          
+          @media (max-width: 480px) {
+            #menu-progress-track,
+            #battle-progress-track {
+              min-width: 200px !important;
+            }
+            
+            .audio-player-container {
+              padding: 0 10px !important;
+            }
+            
+            #menu-play-pause,
+            #battle-play-pause {
+              width: 40px !important;
+              height: 40px !important;
+            }
+          }
+        </style>
+        
+        <script>
+          // Menu Music Player
+          const menuAudio = document.getElementById('menu-audio');
+          menuAudio.volume = 0.6; // Set volume to 60%
+          const menuPlayPause = document.getElementById('menu-play-pause');
+          const menuPlayIcon = document.getElementById('menu-play-icon');
+          const menuPauseIcon = document.getElementById('menu-pause-icon');
+          const menuProgressBar = document.getElementById('menu-progress-bar');
+          const menuProgressHandle = document.getElementById('menu-progress-handle');
+          const menuProgressTrack = document.getElementById('menu-progress-track');
+          
+          menuPlayPause.addEventListener('click', () => {
+            if (menuAudio.paused) {
+              // Pause and mute battle audio if it's playing
+              if (!battleAudio.paused) {
+                battleAudio.pause();
+                battlePlayIcon.style.display = 'block';
+                battlePauseIcon.style.display = 'none';
+              }
+              menuAudio.play();
+              menuPlayIcon.style.display = 'none';
+              menuPauseIcon.style.display = 'block';
+            } else {
+              menuAudio.pause();
+              menuPlayIcon.style.display = 'block';
+              menuPauseIcon.style.display = 'none';
+            }
+          });
+          
+          menuAudio.addEventListener('timeupdate', () => {
+            if (menuAudio.duration) {
+              const percent = (menuAudio.currentTime / menuAudio.duration) * 100;
+              menuProgressBar.style.width = percent + '%';
+              menuProgressHandle.style.left = percent + '%';
+            }
+          });
+          
+          function seekMenu(e) {
+            const rect = menuProgressTrack.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+            if (menuAudio.duration) {
+              menuAudio.currentTime = (percent / 100) * menuAudio.duration;
+            }
+          }
+          
+          let menuDragging = false;
+          menuProgressTrack.addEventListener('mousedown', (e) => {
+            menuDragging = true;
+            seekMenu(e);
+          });
+          document.addEventListener('mousemove', (e) => {
+            if (menuDragging) seekMenu(e);
+          });
+          document.addEventListener('mouseup', () => {
+            menuDragging = false;
+          });
+          menuProgressTrack.addEventListener('click', (e) => {
+            if (!menuDragging) seekMenu(e);
+          });
+          
+          // Battle Music Player
+          const battleAudio = document.getElementById('battle-audio');
+          battleAudio.volume = 0.6; // Set volume to 60%
+          const battlePlayPause = document.getElementById('battle-play-pause');
+          const battlePlayIcon = document.getElementById('battle-play-icon');
+          const battlePauseIcon = document.getElementById('battle-pause-icon');
+          const battleProgressBar = document.getElementById('battle-progress-bar');
+          const battleProgressHandle = document.getElementById('battle-progress-handle');
+          const battleProgressTrack = document.getElementById('battle-progress-track');
+          
+          battlePlayPause.addEventListener('click', () => {
+            if (battleAudio.paused) {
+              // Pause and mute menu audio if it's playing
+              if (!menuAudio.paused) {
+                menuAudio.pause();
+                menuPlayIcon.style.display = 'block';
+                menuPauseIcon.style.display = 'none';
+              }
+              battleAudio.play();
+              battlePlayIcon.style.display = 'none';
+              battlePauseIcon.style.display = 'block';
+            } else {
+              battleAudio.pause();
+              battlePlayIcon.style.display = 'block';
+              battlePauseIcon.style.display = 'none';
+            }
+          });
+          
+          battleAudio.addEventListener('timeupdate', () => {
+            if (battleAudio.duration) {
+              const percent = (battleAudio.currentTime / battleAudio.duration) * 100;
+              battleProgressBar.style.width = percent + '%';
+              battleProgressHandle.style.left = percent + '%';
+            }
+          });
+          
+          function seekBattle(e) {
+            const rect = battleProgressTrack.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+            if (battleAudio.duration) {
+              battleAudio.currentTime = (percent / 100) * battleAudio.duration;
+            }
+          }
+          
+          let battleDragging = false;
+          battleProgressTrack.addEventListener('mousedown', (e) => {
+            battleDragging = true;
+            seekBattle(e);
+          });
+          document.addEventListener('mousemove', (e) => {
+            if (battleDragging) seekBattle(e);
+          });
+          document.addEventListener('mouseup', () => {
+            battleDragging = false;
+          });
+          battleProgressTrack.addEventListener('click', (e) => {
+            if (!battleDragging) seekBattle(e);
+          });
+        </script>
+        
+        <style>
+          .key-skills-list li::before {
+            content: "•";
+            color: #9a9580;
+            position: absolute;
+            left: 0;
+          }
+        </style>
+        
+        <div style="width: 90%; height: 1px; background-color: #444; margin: 5px auto 40px auto;"></div>
+        
+        <p style="margin-bottom: 30px;">
+          The aim was to create a humorous yet immersive experience - from the relaxing bossa nova inspired menu music, to the dynamic, intensity-based battle music layers.
+        </p>
+        
+        <p style="margin-bottom: 30px;">
+          I combined original foley recordings with curated sound libraries, processed everything in Ableton Live and built a responsive audio system in Unity using C# that randomized variations, adjusted real-time parameters and looped seamlessly for infinite playback.
+        </p>
+        
+        <p style="margin-bottom: 30px;">
+          I used a mix of my own recorded and processed foley, as well as searching and curating from existing sound libraries, and created an adaptive system in Unity that randomized variations, handled real-time audio parameters and supported seamless music looping.
+        </p>
+        
+        <div style="width: 90%; height: 1px; background-color: #444; margin: 20px auto;"></div>
+        
+        <h2 style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580; font-size: 1.5rem; text-align: center; margin: 40px 0 20px 0;">FULL GAMEPLAY VIDEO</h2>
+        <div class="project-detail-image" style="margin-bottom: 40px; margin-left: auto; margin-right: auto; overflow: hidden;">
+          <video controls style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+            <source src="../../assets/sound-design/FBHgameplay.mp4" type="video/mp4">
+            Your browser does not support the video element.
+          </video>
+        </div>
+        
+      </div>
+    </div>
+  </body>
+</html>
