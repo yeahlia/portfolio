@@ -84,7 +84,6 @@
             display: block !important;
             width: 100% !important;
             margin-right: 0 !important;
-            vertical-align: top !important;
           }
           .synopsis-info {
             order: 1 !important;
@@ -346,11 +345,16 @@
         <div style="width: 90%; height: 1px; background-color: #444; margin: 20px auto;"></div>
         
         <h2 style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580; font-size: 1.5rem; text-align: center; margin: 40px 0 20px 0;">FULL GAMEPLAY VIDEO</h2>
-        <div class="project-detail-image" style="margin-bottom: 40px; margin-left: auto; margin-right: auto; overflow: hidden;">
-          <video controls style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-            <source src="../../assets/sound-design/FBHgameplay.mp4" type="video/mp4">
-            Your browser does not support the video element.
-          </video>
+        <div class="project-detail-image" style="margin-bottom: 40px; margin-left: auto; margin-right: auto; overflow: hidden; position: relative;">
+          <div style="position: relative; width: 100%; height: 100%; padding-bottom: 56.25%;">
+            <iframe 
+              src="https://www.youtube.com/embed/YwThsrRct70?rel=0&modestbranding=1&iv_load_policy=3&cc_load_policy=0" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;">
+            </iframe>
+          </div>
         </div>
         
       </div>

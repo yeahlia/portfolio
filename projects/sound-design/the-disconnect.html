@@ -48,44 +48,16 @@
       <h1 class="section-title">THE DISCONNECT</h1>
       <div class="project-detail-container">
         <div class="project-detail-image" style="margin-bottom: 0; position: relative; overflow: hidden;">
-          <div style="position: relative; width: 100%; height: 100%;">
-            <a href="#" target="_blank" style="display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
-              <video
-                id="disconnect-video"
-                controls
-                style="transition: opacity 0.3s ease; width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 8px;"
-                onmouseover="this.style.opacity='0.8'" 
-                onmouseout="this.style.opacity='1'"
-              >
-                <source src="../../assets/sound-design/thedisconnect.mp4" type="video/mp4">
-                Your browser does not support the video element.
-              </video>
-            </a>
-            <div id="disconnect-fallback" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #1a1a1a; padding: 40px; text-align: center; color: #f0f0f0; flex-direction: column; justify-content: center; align-items: center; z-index: 2;">
-              <p style="margin-bottom: 20px; font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580; font-size: 1.2rem;">Sorry! Something went wrong with loading!</p>
-              <p id="disconnect-link" style="color: #f0f0f0; font-size: 1.1rem; font-family: 'Special Gothic Expanded One', sans-serif; text-decoration: underline; transition: color 0.3s ease;">CLICK HERE TO OPEN THE DISCONNECT IN A NEW TAB</p>
-            </div>
-            <style>
-              #disconnect-link:hover {
-                color: #9a9580 !important;
-              }
-            </style>
+          <div style="position: relative; width: 100%; height: 100%; padding-bottom: 56.25%;">
+            <iframe 
+              src="https://www.youtube.com/embed/qniWWQJiwyg?rel=0&modestbranding=1&iv_load_policy=3&cc_load_policy=0" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;">
+            </iframe>
           </div>
         </div>
-        <script>
-          const disconnectVideo = document.getElementById('disconnect-video');
-          const disconnectFallback = document.getElementById('disconnect-fallback');
-          
-          disconnectVideo.addEventListener('error', () => {
-            disconnectVideo.style.display = 'none';
-            disconnectFallback.style.display = 'flex';
-          });
-          
-          disconnectVideo.addEventListener('loadeddata', () => {
-            // Video loaded successfully, hide fallback if it was shown
-            disconnectFallback.style.display = 'none';
-          });
-        </script>
         <p style="text-align: left; margin-top: 5px; margin-bottom: 20px; margin-left: 0; font-size: 0.8rem; color: #9a9580; font-family: 'Special Gothic Expanded One', sans-serif; font-style: italic; transform: skew(-5deg); text-transform: uppercase; max-width: 850px; margin-left: auto; margin-right: auto;">WATCH THE FULL ANIMATION HERE!</p>
         
         <!-- Credits section - FORCE LEFT ALIGNMENT -->
@@ -114,7 +86,6 @@
             display: block !important;
             width: 100% !important;
             margin-right: 0 !important;
-            vertical-align: top !important;
           }
           .synopsis-info {
             order: 1 !important;
