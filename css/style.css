@@ -1,0 +1,1899 @@
+/* =============================== BASE ============================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  background: #121212; /* background for entire site */
+  color: #f0f0f0; /* light text for entire site */
+}
+
+/* Only apply overflow hidden to home page */
+body.home-page {
+  overflow: hidden; /* prevents scrolling on parts i dont want them to see */
+}
+
+/* Prevent horizontal scrolling on content pages, allow vertical */
+body.content-page {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Make contact page non-scrollable on larger screens */
+body.content-page:has(.contact-container) {
+  overflow: hidden;
+  height: 100vh;
+}
+
+body.content-page:has(.contact-container) .content-page {
+  overflow: hidden;
+  height: 100vh;
+  max-height: 100vh;
+}
+
+/* Allow scrolling on contact page for smaller screens */
+@media (max-width: 768px) {
+  body.content-page:has(.contact-container) {
+    overflow-y: auto;
+    height: auto;
+  }
+
+  body.content-page:has(.contact-container) .content-page {
+    overflow: visible;
+    height: auto;
+    min-height: 100vh;
+    max-height: none;
+  }
+}
+
+/* Make about page non-scrollable */
+
+/* Allow scrolling on sound design page when content exceeds viewport */
+body.sound-design-page {
+  overflow-y: auto;
+}
+
+/* Remove min-height constraint for sound design page so content flows naturally */
+body.sound-design-page .content-page {
+  min-height: auto;
+}
+
+/* Allow scrolling on interactive design page when content exceeds viewport */
+body.interactive-design-page {
+  overflow-y: auto;
+}
+
+/* Remove min-height constraint for interactive design page so content flows naturally */
+body.interactive-design-page .content-page {
+  min-height: auto;
+}
+
+/* =============================== NAVIGATION ============================================= */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(18, 18, 18, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #333;
+  padding: 20px 0;
+  transition: all 0.3s ease;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.logo {
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-size: 1.5rem;
+  color: #f0f0f0;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+/* Hamburger Menu */
+.menu-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
+.menu-toggle span {
+  width: 100%;
+  height: 3px;
+  background: #9a9580;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(18, 18, 18, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 10000;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.menu-overlay.active {
+  transform: translateX(0);
+}
+
+.menu-content {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.menu-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-links li {
+  margin-bottom: 30px;
+}
+
+.menu-links a {
+  font-size: 2rem;
+  font-weight: 400;
+  color: #f0f0f0;
+  text-decoration: none;
+  font-family: "Special Gothic Expanded One", sans-serif;
+  transition: color 0.3s ease;
+}
+
+.menu-links a:hover {
+  color: #9a9580;
+}
+
+/* Current page indicator in menu */
+.menu-links a.current-page {
+  color: #9a9580 !important;
+  font-weight: bold;
+  position: relative;
+  padding-left: 30px;
+}
+
+.menu-links a.current-page::before {
+  content: "★";
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #9a9580;
+  z-index: 10;
+}
+
+
+/* =============================== HOME PAGE NAVIGATION ============================================= */
+.home-nav {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+/* =============================== FLOATING MENU ============================================= */
+.floating-menu {
+  position: fixed;
+  top: 20px;
+  right: 40px;
+  z-index: 1000;
+}
+
+.home-menu-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
+.home-menu-toggle span {
+  width: 100%;
+  height: 3px;
+  background: #9a9580;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.home-menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.home-menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.home-menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ============================== MAIN SCREEN  ============================================= */
+main#main-screen {
+  /* main screen container */
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  display: flex;
+  justify-content: center; /* centre content horizontally */
+  align-items: center; /* centre content vertically */
+  background-color: #121212; /* matches background */
+}
+
+/* ============================ BACKGROUND RECTANGLES ============================================ */
+.background-container {
+  /* container for background images */
+  position: absolute; /* made the position behind the name */
+  display: flex;
+  gap: 10px; /* space between images */
+  width: 80%; /* container width */
+  height: 50%; /* container height */
+  z-index: 5; /* placed behind name text */
+  overflow: hidden;
+}
+
+.background-box {
+  /* individual image box */
+  flex: 1; /* same width for each box */
+  overflow: hidden;
+  position: relative;
+  z-index: 5;
+  cursor: default;
+  transition: filter 0.3s ease;
+  pointer-events: none; /* disabled by default */
+}
+
+.background-box img {
+  /* image inside each box */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* scales image */
+  display: block;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.rectangle-overlay {
+  /* text on hover */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0; /* hidden by default */
+  transition: opacity 0.3s ease; /* fade */
+  pointer-events: none; /* lets hover pass through to box */
+  z-index: 10;
+}
+
+.rectangle-overlay span {
+  /* text inside the overlay */
+  font-family: "IBM Plex Serif", serif;
+  font-size: 2rem;
+  color: #f0f0f0;
+  text-align: center;
+  white-space: normal;
+  word-wrap: break-word;
+  max-width: 100%;
+  padding: 0 10px;
+}
+
+.background-box.active-hover {
+  /* enable interaction when scrolled */
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.background-box.active-hover:hover img {
+  /* dim image on hover */
+  filter: brightness(40%);
+}
+
+.background-box.active-hover:hover .rectangle-overlay {
+  /* show overlay text on hover */
+  opacity: 1;
+}
+
+/* ===============================DESIGNER NAME============================================= */
+.my-name {
+  /* designer name */
+  position: relative;
+  z-index: 10; /* appears above images */
+  font-size: 9vw;
+  font-weight: 400;
+  font-style: normal;
+  font-family: "Special Gothic Expanded One", sans-serif;
+  color: #f0f0f0;
+  text-align: center;
+  transition: transform 0.6s ease, opacity 0.6s ease; /* animate when scroll */
+}
+
+.my-name.inactive {
+  /* faded version after scroll */
+  opacity: 0; /* fades out */
+  pointer-events: none;
+}
+
+/* ===============================SUBTITLE TEXT============================================= */
+.subtitle-left,
+.subtitle-right {
+  position: absolute;
+  bottom: 17.5%;
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-size: 1.2rem;
+  color: #9a9580;
+  font-weight: 400;
+  z-index: 10;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.subtitle-left {
+  left: 10%;
+  text-align: left;
+}
+
+.subtitle-right {
+  right: 10%;
+  text-align: right;
+}
+
+.subtitle-left.inactive,
+.subtitle-right.inactive {
+  opacity: 0;
+}
+
+/* ===============================RESPONSIVE SUBTITLES============================================= */
+@media (max-width: 768px) {
+  .subtitle-left,
+  .subtitle-right {
+    bottom: 15%;
+    font-size: 1rem;
+  }
+  
+  .subtitle-left {
+    left: 5%;
+  }
+  
+  .subtitle-right {
+    right: 5%;
+  }
+
+  .featured-work-subtitle {
+    font-size: 0.85rem;
+    white-space: normal;
+    max-width: 95%;
+    padding: 80px 15px 0 15px;
+    bottom: 2%;
+    line-height: 1.4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .featured-work-subtitle .browse-line,
+  .featured-work-subtitle .projects-line {
+    display: block;
+    text-align: center;
+  }
+
+  .featured-work-subtitle .project-link {
+    padding: 2px 4px;
+    display: inline-block;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .subtitle-left,
+  .subtitle-right {
+    bottom: 12%;
+    font-size: 0.9rem;
+  }
+  
+  .subtitle-left {
+    left: 2%;
+  }
+  
+  .subtitle-right {
+    right: 2%;
+  }
+
+  .featured-work-subtitle {
+    font-size: 0.7rem;
+    white-space: normal;
+    max-width: 98%;
+    padding: 60px 10px 0 10px;
+    bottom: 1%;
+    line-height: 1.3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+  }
+
+  .featured-work-subtitle .browse-line,
+  .featured-work-subtitle .projects-line {
+    display: block;
+    text-align: center;
+  }
+
+  .featured-work-subtitle .project-link {
+    padding: 1px 3px;
+    font-size: 0.9em;
+    display: inline-block;
+    text-align: center;
+  }
+}
+
+/* ===============================FEATURED WORK TEXT============================================= */
+.featured-work-text {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15; /* Higher than project squares (z-index: 5) */
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.featured-work-text h2 {
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-size: 4vw;
+  color: #9a9580;
+  text-align: center;
+  font-weight: 400;
+}
+
+.featured-work-subtitle {
+  position: absolute;
+  bottom: 16%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-size: 1.2rem;
+  color: #9a9580;
+  text-align: center;
+  font-weight: 400;
+  z-index: 15;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: auto;
+  white-space: nowrap;
+  padding: 0 20px;
+  max-width: 90%;
+  box-sizing: border-box;
+}
+
+.featured-work-text.visible {
+  opacity: 1;
+}
+
+.featured-work-subtitle.visible {
+  opacity: 1;
+}
+
+.featured-work-subtitle.visible .project-link {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.featured-work-subtitle .project-link {
+  color: #f0f0f0 !important;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  cursor: default;
+  position: relative;
+  padding: 5px 10px;
+  border-radius: 4px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.featured-work-subtitle .project-link:hover {
+  color: #9a9580 !important;
+  transform: translateY(-2px);
+}
+
+.featured-work-subtitle .project-link em {
+  font-style: italic;
+  color: inherit;
+  transition: inherit;
+}
+
+/* ====================================== ANIMATED STARS ========================================= */
+.star {
+  /* animated star */
+  position: fixed; /* Fixed positioning to prevent movement on resize */
+  transform-origin: center;
+  transform: translate(-50%, -50%);
+  transition: transform 0.6s ease, opacity 0.6s ease; /* animates position/fade */
+  z-index: 10; /* placed on top of everything */
+}
+
+.star img {
+  /* star svg */
+  width: 100px; /* Half the base size */
+  height: auto;
+  display: block;
+  filter: brightness(0) saturate(100%) invert(63%) sepia(11%) saturate(571%)
+    hue-rotate(2deg) brightness(90%) contrast(90%); /* svg wouldnt work so i changed the color here manually and asked chat gpt to make
+    it the same color as the icons lol */
+}
+
+/* size of each star - half the size */
+.star1 {
+  width: 200px !important;
+}
+.star2 {
+  width: 175px !important;
+}
+.star3 {
+  width: 250px !important;
+}
+
+/* ===============================RESPONSIVE STARS============================================= */
+@media (max-width: 1200px) {
+  .star img {
+    width: 80px !important;
+  }
+  
+  .star1 {
+    width: 160px !important;
+  }
+  .star2 {
+    width: 140px !important;
+  }
+  .star3 {
+    width: 200px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .star img {
+    width: 60px !important;
+  }
+  
+  .star1 {
+    width: 120px !important;
+  }
+  .star2 {
+    width: 100px !important;
+  }
+  .star3 {
+    width: 150px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .star img {
+    width: 40px !important;
+  }
+  
+  .star1 {
+    width: 80px !important;
+  }
+  .star2 {
+    width: 70px !important;
+  }
+  .star3 {
+    width: 100px !important;
+  }
+}
+
+.scroll-scale {
+  /* scroll animation */
+  transform: translate(-50%, -50%) scale(5) !important; /* bigger and moves off screen */
+  opacity: 0; /* fades out */
+}
+
+/* =========================== FOOTER ANIMATION ========================================== */
+.footer-animation {
+  /* makes sure everything stays in place during transition */
+  position: fixed;
+  z-index: 9999;
+  color: #121212;
+  font-weight: bold;
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ======================== CONTENT ======================================== */
+.content-page {
+  /* all content pages for consistency */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  width: 100vw;
+  padding: 40px;
+  background: #181818;
+  z-index: 5;
+  overflow: visible;
+  animation: fadeIn 0.5s ease forwards;
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 400;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* short animation when lcicked on page! looks better in my opinion */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.content-page h1 {
+  /* title text*/
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #9a9580;
+  font-family: "Special Gothic Expanded One", sans-serif;
+}
+
+.content-page p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  color: #ddd;
+}
+
+/* back button on */
+.back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: 2px solid #9a9580;
+  color: #9a9580;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: "Special Gothic Expanded One", sans-serif;
+  z-index: 15;
+  transition: background 0.2s ease;
+}
+
+.back-button:hover {
+  /* invert colors on hover */
+  background: #9a9580;
+  color: #121212;
+}
+
+/* ======================= ANIMATION FADES ================================= */
+/* is the fading animation when u click onto the main screen and such */
+#main-screen.fade-in {
+  animation: fadeInMain 0.5s ease forwards;
+}
+
+@keyframes fadeInMain {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.content-page.fade-out {
+  animation: fadeOutPage 0.4s ease forwards;
+}
+
+@keyframes fadeOutPage {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/* ============================ ABOUT SECTION ====================================== */
+#about h1 {
+  /* title at top of the section */
+  font-size: 3.5rem;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.about-container {
+  /* layout container */
+  display: flex;
+  gap: 60px; /* space between image and text */
+  max-width: 1200px;
+  margin: 60px auto 0;
+  padding: 0 20px 60px 20px;
+  align-items: center;
+  flex-wrap: wrap; /* stacking on small screens!!! */
+  justify-content: center;
+}
+
+.about-image {
+  /* profile image */
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover; /* makes sure image doest stretch */
+  aspect-ratio: 1 / 1;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.about-text {
+  /* text container next to image */
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+}
+
+.about-text p {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #e0e0e0;
+  text-align: left;
+}
+
+.about-text-extended {
+  max-width: 75%;
+  width: 100%;
+  margin: 80px auto 0;
+  padding: 0 40px 60px 40px;
+}
+
+.about-section-title {
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-size: 2.5rem;
+  color: #9a9580;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.about-text-extended p {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #e0e0e0;
+  text-align: left;
+  margin-bottom: 24px;
+  max-width: 100%;
+}
+
+.about-text-extended p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==================== CONTACT SECTION ===================================== */
+#contact h1 {
+  /* contact title*/
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 3.5rem;
+}
+
+.contact-container {
+  /* main layout */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: calc(100vh - 200px);
+  max-height: calc(100vh - 200px);
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .contact-container {
+    gap: 15px;
+    padding: 0 15px;
+    height: auto;
+    max-height: none;
+    min-height: auto;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-container {
+    gap: 10px;
+    padding: 0 10px;
+    height: auto;
+    max-height: none;
+    min-height: auto;
+    overflow: visible;
+  }
+}
+
+.contact-info {
+  /* left column */
+  flex: 1;
+  min-width: 360px;
+}
+
+@media (max-width: 768px) {
+  .contact-info {
+    min-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-info {
+    min-width: 100%;
+  }
+}
+
+.contact-info p {
+  font-size: 1.1rem;
+  color: #ccc;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.contact-info p .contact-intro {
+  font-family: "Special Gothic Expanded One", sans-serif;
+  color: #9a9580;
+  display: block;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.contact-list {
+  /* list with icons */
+  list-style: none;
+  padding: 0;
+}
+
+.contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  color: #f0f0f0;
+  margin-bottom: 12px;
+}
+
+.contact-list li a {
+  color: #f0f0f0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-list li a:hover {
+  color: #9a9580;
+}
+
+.contact-icon {
+  /* icon images */
+  width: 1.2rem;
+  height: 1.2rem;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: brightness(0) saturate(100%) invert(67%) sepia(8%) saturate(800%) hue-rotate(15deg) brightness(95%) contrast(90%);
+}
+
+.contact-list .icon {
+  font-size: 1.3rem;
+  color: #9a9580;
+}
+
+.contact-form {
+  /* right column (form) */
+  flex: 1;
+  min-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .contact-form {
+    min-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form {
+    min-width: 100%;
+    gap: 12px;
+  }
+}
+
+.name-fields {
+  /* first and last name inputs */
+  display: flex;
+  gap: 10px;
+}
+
+.name-fields input {
+  flex: 1; /* makes the width equal */
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px;
+  background: #1e1e1e;
+  color: #fff;
+  border: 1px solid #444;
+  font-size: 1rem;
+  font-family: "IBM Plex Serif", serif;
+}
+
+.contact-form button {
+  /* submit button */
+  padding: 10px 20px;
+  background-color: #9a9580;
+  color: #121212;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  font-family: "Special Gothic Expanded One", sans-serif;
+  transition: background 0.2s ease;
+}
+
+.contact-form button:hover {
+  background-color: #b3ae91; /* lighter shade on hover */
+}
+
+.contact-form button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.form-message {
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  text-align: center;
+  font-family: "IBM Plex Serif", serif;
+  min-height: 20px;
+}
+
+.form-message.success {
+  background-color: rgba(76, 175, 80, 0.2);
+  color: #4caf50;
+  border: 1px solid #4caf50;
+}
+
+.form-message.error {
+  background-color: rgba(255, 68, 68, 0.2);
+  color: #ff4444;
+  border: 1px solid #ff4444;
+}
+
+@keyframes shake {
+  /* shake animation for when its not validated */
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+button.shake {
+  animation: shake 0.4s ease;
+}
+
+/* ============================ PROJECTS SECTION ==================================== */
+
+#projects h1.section-title,
+#about h1.section-title,
+#sound-design h1,
+#interactive-design h1 {
+  /* projects title */
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 3.5rem;
+}
+
+/* Responsive headings */
+@media (max-width: 768px) {
+  #projects h1.section-title,
+  #about h1.section-title,
+  #sound-design h1,
+  #interactive-design h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  #projects h1.section-title,
+  #about h1.section-title,
+  #sound-design h1,
+  #interactive-design h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+}
+
+.carousel-container {
+  /* container carousel  */
+  position: relative;
+  overflow: hidden; /* hides overflowed slides */
+  max-width: 1300px;
+  width: 100%;
+  margin: 40px auto 40px;
+  padding: 0 20px;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-track {
+  /* track that moves left andright */
+  display: flex;
+  transition: transform 0.5s ease; /* slide motion */
+  gap: 40px;
+  min-width: 100%;
+  width: max-content;
+}
+
+.carousel-slide {
+  /* each slide */
+  flex: 0 0 80%;
+  opacity: 0.4; /* dimmed when not highlighted */
+  transform: scale(0.9); /* smaller when inactive */
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  min-height: 350px;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-color: #1a1a1a;
+  padding: 30px;
+}
+
+.carousel-slide.active {
+  /* highlighted slide */
+  opacity: 1;
+  transform: scale(1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  border: 2px solid #333;
+}
+
+.project-image {
+  width: 100%;
+  max-width: 550px;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e1e1e;
+}
+
+.project-image img {
+  /* image */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.project-text {
+  /* text block */
+  max-width: 400px;
+  color: #ccc;
+  text-align: left;
+}
+
+.project-text h2 {
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-size: 2rem;
+  color: #9a9580;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.project-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* arrows */
+.arrow {
+  /* arrow button */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #9a9580;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: background 0.3s ease, transform 0.2s ease;
+  padding: 0;
+}
+
+.arrow:hover {
+  background-color: #9a9580;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.arrow-icon {
+  /* svg icon inside the button */
+  width: 18px;
+  height: 18px;
+  fill: #9a9580;
+  transition: fill 0.3s ease;
+}
+
+.arrow:hover .arrow-icon {
+  fill: #121212; /* icon turns black on hover */
+}
+
+.left-arrow {
+  left: 20px;
+}
+
+.right-arrow {
+  right: 20px;
+}
+
+.flip {
+  /* flips icon horizontally  */
+  transform: scaleX(-1);
+}
+
+/* dots under carousel */
+.carousel-indicators {
+  text-align: center;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  margin: 0 5px;
+  background-color: #555;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.dot.active {
+  background-color: #9a9580; /* highlights current slide */
+}
+
+@media (max-width: 480px) {
+  .carousel-indicators {
+    margin-top: 10px;
+  }
+
+  .dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 4px;
+  }
+}
+
+/* makes it responsive!!! */
+@media (max-width: 1024px) {
+  .carousel-container {
+    max-width: 95%;
+    padding: 0 15px;
+  }
+
+  .project-image {
+    max-width: 450px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-container {
+    max-width: 100%;
+    padding: 0 20px;
+    min-height: 350px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .carousel-track {
+    gap: 20px;
+  }
+
+  .carousel-slide {
+    flex: 0 0 calc(100% - 40px);
+    flex-direction: column; /* stacks image and text */
+    align-items: center;
+    min-height: auto;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .project-image {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .project-image img {
+    max-width: 100%;
+  }
+
+  .project-text {
+    max-width: 100%;
+    width: 100%;
+    text-align: center;
+  }
+
+  .project-text h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .project-text p {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .left-arrow {
+    left: 10px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .right-arrow {
+    right: 10px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .arrow-icon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-container {
+    padding: 0 15px;
+    min-height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .carousel-slide {
+    flex: 0 0 calc(100% - 20px);
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .project-text h2 {
+    font-size: 1.3rem;
+  }
+
+  .project-text p {
+    font-size: 0.9rem;
+  }
+
+  .left-arrow {
+    left: 5px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .right-arrow {
+    right: 5px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .arrow-icon {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+
+.carousel-slide:first-child {
+  margin-left: calc((100% - 80%) / 2); /* center first slide */
+}
+
+@media (max-width: 768px) {
+  .carousel-slide:first-child {
+    margin-left: 0;
+  }
+}
+
+/* ============================ SKILLS SECTION ===================================== */
+.skills-section {
+  margin-top: 40px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+}
+
+.skills-section h2 {
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-size: 1.5rem;
+  color: #9a9580;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.skills-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.skill-column {
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
+}
+
+.skill-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-column li {
+  color: #f0f0f0;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  padding-left: 0;
+  font-weight: 500;
+}
+
+/* Responsive skills section */
+@media (max-width: 768px) {
+  .skills-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .skill-column {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .skills-section h2 {
+    font-size: 1.3rem;
+  }
+
+  .skill-column li {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-section {
+    padding: 0 15px;
+    margin-top: 30px;
+  }
+
+  .skills-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+
+  .skill-column li {
+    font-size: 0.9rem;
+  }
+}
+
+/* ============================ SCROLL INDICATOR ===================================== */
+.scroll-indicator {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 40px !important;
+  z-index: 1000 !important;
+  left: auto !important;
+  top: auto !important;
+}
+
+.scroll-indicator span {
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #9a9580;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.dot1, .dot2, .dot3 {
+  transition: opacity 0.3s ease;
+}
+
+.scroll-indicator:hover span {
+  opacity: 1;
+}
+
+/* ============================ MAIN SCREEN SCROLL INDICATOR ===================================== */
+.main-scroll-indicator {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.main-scroll-indicator.inactive {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.main-scroll-indicator span {
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-size: 0.9rem;
+  color: #9a9580;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 400;
+}
+
+/* ============================ PROJECTS GRID SECTION ===================================== */
+.projects-grid-section {
+  margin-top: 40px;
+  padding: 0 20px 40px 20px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.grid-section-title {
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-size: 2.5rem;
+  color: #9a9580;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-weight: 400;
+  position: relative;
+}
+
+.grid-section-title::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 1px;
+  background-color: #444;
+}
+
+@media (max-width: 768px) {
+  .grid-section-title {
+    font-size: 2rem;
+    margin-top: 40px;
+    margin-bottom: 30px;
+  }
+  
+  .grid-section-title::before {
+    top: -60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-section-title {
+    font-size: 1.5rem;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  
+  .grid-section-title::before {
+    top: -60px;
+  }
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.projects-grid .project-card {
+  background: rgba(26, 26, 26, 0.9);
+  border-radius: 12px;
+  border: none;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.projects-grid .project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.projects-grid .project-image {
+  width: 100% !important;
+  max-width: none !important;
+  aspect-ratio: 16 / 9 !important;
+  overflow: hidden;
+  display: block;
+  margin: 0;
+  padding: 0;
+  background-color: transparent !important;
+  border-radius: 0;
+}
+
+.projects-grid .project-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border-radius: 12px 12px 0 0;
+  transition: transform 0.3s ease;
+}
+
+.projects-grid .project-card:hover .project-image img {
+  transform: scale(1.05);
+}
+
+.project-content {
+  padding: 20px;
+}
+
+.project-content h3 {
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-size: 1.2rem;
+  color: #f0f0f0;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.project-content p {
+  color: #ccc;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  text-align: center;
+  margin: 0;
+}
+
+/* Responsive grid */
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .projects-grid-section {
+    padding: 0 15px 20px 15px;
+  }
+
+  .project-content {
+    padding: 15px;
+  }
+
+  .project-content h3 {
+    font-size: 1.1rem;
+  }
+
+  .project-content p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-grid-section {
+    padding: 0 10px 15px 10px;
+  }
+
+  .project-content {
+    padding: 12px;
+  }
+
+  .project-content h3 {
+    font-size: 1rem;
+  }
+
+  .project-content p {
+    font-size: 0.8rem;
+  }
+
+  .projects-grid .project-image {
+    aspect-ratio: 16 / 9 !important;
+  }
+}
+
+/* ========================== INDIVIDUAL PROJECT DETAILS =================================== */
+
+.project-detail-container {
+  /* containr individual project pages */
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column; /* stacks image and text vertically */
+  align-items: center;
+}
+
+.project-detail-image {
+  /* container for the project image */
+  width: 100%;
+  max-width: 850px;
+  aspect-ratio: 16 / 9;
+  overflow: visible;
+  border: 2px solid #333;
+  border-radius: 8px; /* rounded corners */
+  margin-bottom: 40px;
+}
+
+.project-detail-image img,
+.project-detail-image video {
+  /* image and video */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/*  titles for each individual project section */
+#project1 h1,
+#project2 h1,
+#project3 h1,
+#project4 h1 {
+  font-size: 3.5rem;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* body content for each project */
+#project1 p,
+#project2 p,
+#project3 p,
+#project4 p {
+  color: #ccc;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: left;
+  max-width: 835px;
+}
+
+#project1 h1,
+#project2 h1,
+#project3 h1,
+#project4 h1 {
+  margin-bottom: 40px; /* space under title */
+}
+
+#project1 .project-detail-container,
+#project2 .project-detail-container,
+#project3 .project-detail-container,
+#project4 .project-detail-container {
+  margin-top: 10px; /* extra space above image block */
+}
+
+/* ========================== PAGE TRANSITIONS =================================== */
+.page-transition {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.page-transition.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================== RESPONSIVE DESIGN =================================== */
+@media (max-width: 768px) {
+  .nav-content {
+    padding: 0 20px;
+  }
+  
+  .menu-links a {
+    font-size: 1.5rem;
+  }
+  
+  .my-name {
+    font-size: 12vw;
+  }
+  
+  .featured-work-text h2 {
+    font-size: 6vw;
+  }
+  
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .contact-container {
+    flex-direction: column;
+  }
+
+  .content-page {
+    padding: 30px 20px;
+  }
+
+  .content-page h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+
+  .contact-info p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+
+  .contact-list li {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .floating-menu {
+    right: 20px;
+    top: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-page {
+    padding: 20px 15px;
+  }
+
+  .content-page h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .contact-info p {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+
+  .contact-info p .contact-intro {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+
+  .contact-list li {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    gap: 8px;
+  }
+
+  .contact-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 0.95rem;
+    padding: 8px;
+  }
+
+  .contact-form button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+
+  .name-fields {
+    gap: 8px;
+  }
+
+  .floating-menu {
+    right: 15px;
+    top: 15px;
+  }
+}
