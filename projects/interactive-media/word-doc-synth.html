@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Doc Synth - Lia Aguilar</title>
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <script src="../../js/script.js" defer></script>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Lora:ital,wght@0,400..700;1,400..700&family=Notable&family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Special+Gothic+Expanded+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="content-page">
+    <!-- Floating Hamburger Menu -->
+    <div class="floating-menu">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay">
+      <div class="menu-content">
+        <ul class="menu-links">
+          <li><a href="../../index.html">HOME</a></li>
+          <li><a href="../../about.html">ABOUT</a></li>
+          <li><a href="../../sound-design.html">SOUND DESIGN</a></li>
+          <li><a href="../../interactive-design.html">INTERACTIVE MEDIA</a></li>
+          <li><a href="../../all-works.html">ALL WORKS</a></li>
+          <li><a href="../../contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Back Button -->
+    <button class="back-button">← BACK</button>
+
+    <!-- Project Detail Content -->
+    <div class="content-page">
+      <h1 class="section-title">WORD DOC SYNTH</h1>
+      <div class="project-detail-container" style="max-width: 100%;">
+        <div style="max-width: 1600px; margin: 0 auto 0 auto; padding: 0 20px; aspect-ratio: auto; height: auto; overflow: hidden; position: relative;">
+          <div id="word-doc-iframe-container" style="width: 1400px; height: 800px; border: 2px solid #444; border-radius: 8px; background: #1a1a1a; max-width: 100%; margin: 0 auto; position: relative;">
+            <iframe 
+              id="word-doc-iframe"
+              src="https://worddoc.netlify.app/" 
+              frameborder="0"
+              scrolling="no"
+              style="width: 100%; height: 100%; border: none; display: block;"
+              allowfullscreen
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox">
+            </iframe>
+            <div id="word-doc-fallback" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #1a1a1a; padding: 40px; text-align: center; color: #f0f0f0; flex-direction: column; justify-content: center; align-items: center; border-radius: 8px; cursor: pointer;" onclick="window.open('https://worddoc.netlify.app/', '_blank')">
+              <p style="margin-bottom: 20px; font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580; font-size: 1.2rem;">Sorry! Something went wrong with loading!</p>
+              <p id="word-doc-link" style="color: #f0f0f0; font-size: 1.1rem; font-family: 'Special Gothic Expanded One', sans-serif; text-decoration: underline; transition: color 0.3s ease;">CLICK HERE TO OPEN WORD DOC SYNTH IN A NEW TAB</p>
+            </div>
+            <style>
+              #word-doc-link:hover {
+                color: #9a9580 !important;
+              }
+            </style>
+          </div>
+        </div>
+        <script>
+          const wordDocIframe = document.getElementById('word-doc-iframe');
+          const wordDocFallback = document.getElementById('word-doc-fallback');
+          let wordDocLoaded = false;
+          
+          wordDocIframe.addEventListener('load', () => {
+            wordDocLoaded = true;
+            setTimeout(() => {
+              try {
+                const iframeDoc = wordDocIframe.contentDocument || wordDocIframe.contentWindow.document;
+                if (iframeDoc && iframeDoc.body && iframeDoc.body.innerHTML.trim() === '') {
+                  wordDocIframe.style.display = 'none';
+                  wordDocFallback.style.display = 'flex';
+                }
+              } catch (e) {
+                const rect = wordDocIframe.getBoundingClientRect();
+                if (rect.height < 100) {
+                  wordDocIframe.style.display = 'none';
+                  wordDocFallback.style.display = 'flex';
+                }
+              }
+            }, 2000);
+          });
+          
+          setTimeout(() => {
+            if (!wordDocLoaded) {
+              wordDocIframe.style.display = 'none';
+              wordDocFallback.style.display = 'flex';
+            }
+          }, 5000);
+          
+          wordDocIframe.addEventListener('error', () => {
+            wordDocIframe.style.display = 'none';
+            wordDocFallback.style.display = 'flex';
+          });
+        </script>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 145px; margin-top: 5px; margin-bottom: 20px; max-width: 850px; margin-left: auto; margin-right: auto;">
+          <p style="margin: 0; font-size: 0.8rem; color: #9a9580; font-family: 'Special Gothic Expanded One', sans-serif; font-style: italic; transform: skew(-5deg); text-transform: uppercase;">INTERACT WITH THE PROJECT HERE!</p>
+          <p style="margin: 0; font-size: 0.8rem; color: #9a9580; font-family: 'Special Gothic Expanded One', sans-serif; font-style: italic; transform: skew(-5deg); text-transform: uppercase;">LINK TO WEBSITE: <a href="https://worddoc.netlify.app/" target="_blank" style="color: #f0f0f0; text-decoration: underline; transition: color 0.3s ease;">Word Doc Synth</a></p>
+        </div>
+        <style>
+          a[href="https://worddoc.netlify.app/"]:hover {
+            color: #9a9580 !important;
+          }
+        </style>
+        
+        <!-- Developer section - FORCE LEFT ALIGNMENT -->
+        <div class="developer-synopsis-container" style="max-width: 1000px; margin: 40px auto; padding: 0 40px; text-align: left !important;">
+          <div class="developer-info" style="display: inline-block; vertical-align: top; width: 300px; margin-right: 40px; text-align: left !important;">
+            <p style="text-align: left !important; margin: 0 0 8px 0;"><span style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580;">Technologies:</span> HTML, CSS, JavaScript</p>
+            <p style="text-align: left !important; margin: 0 0 8px 0;"><span style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580;">Type:</span> Interactive Web Application</p>
+          </div>
+          
+          <div class="synopsis-info" style="display: inline-block; vertical-align: top; width: 500px; text-align: left !important;">
+            <p style="text-align: left !important; margin: 0;">
+              Word Doc Synth reimagines a word processor as a playable instrument . letters trigger notes, words form chords, and formatting changes the sound. By combining nostalgic 2000s-style UI with generative music coding, it transforms everyday typing into an expressive, musical experience.
+            </p>
+          </div>
+        </div>
+        
+        <style>
+        @media (max-width: 1000px) {
+          .developer-synopsis-container {
+            display: flex !important;
+            flex-direction: column !important;
+          }
+          .developer-info, .synopsis-info {
+            display: block !important;
+            width: 100% !important;
+            margin-right: 0 !important;
+            vertical-align: top !important;
+          }
+          .synopsis-info {
+            order: 1 !important;
+            margin-bottom: 40px !important;
+          }
+          .developer-info {
+            order: 2 !important;
+            margin-bottom: 0 !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .developer-synopsis-container {
+            display: flex !important;
+            flex-direction: column !important;
+          }
+          .developer-info, .synopsis-info {
+            display: block !important;
+            width: 100% !important;
+            margin-right: 0 !important;
+          }
+          .synopsis-info {
+            order: 1 !important;
+            margin-bottom: 40px !important;
+          }
+          .developer-info {
+            order: 2 !important;
+            margin-bottom: 0 !important;
+          }
+        }
+        </style>
+        
+        <h2 style="font-family: 'Special Gothic Expanded One', sans-serif; color: #9a9580; font-size: 1.5rem; text-align: center; margin: 20px 0 20px 0;">KEY SKILLS</h2>
+        <ul class="key-skills-list" style="text-align: left; max-width: 400px; margin: 0 auto 40px auto; list-style: none; padding-left: 0; margin-bottom: 60px;">
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">JavaScript (Tone.js), HTML, CSS</li>
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">Real-time sound mapping & synthesis</li>
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">UI/UX design and onboarding flow</li>
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">Recursive, modular code structure</li>
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">Interaction design and visual feedback</li>
+          <li style="margin-bottom: 8px; color: #f0f0f0; position: relative; padding-left: 20px;">Interactive sound</li>
+        </ul>
+        
+        <style>
+          .key-skills-list li::before {
+            content: "•";
+            color: #9a9580;
+            position: absolute;
+            left: 0;
+          }
+        </style>
+        
+        <div style="width: 90%; height: 1px; background-color: #444; margin: 5px auto 40px auto;"></div>
+        
+        <p style="margin-bottom: 30px;">
+          Inspired by the idea of "writing sound", this project explores how language and interaction can merge into play. The interface intentionally mimics a certain popular word doc editor for instant familiarity, letting users focus on discovering sonic rules rather than learning a new tool. Each text format (bold, italics, underline) manipulates tone in intuitive ways to create a sense of authorship and creation through sound.
+        </p>
+        <p style="margin-bottom: 30px;">
+          I wanted the project to feel playful but grounded in usability: something experimental, yet approachable. Every design decision was made to keep the experience musical, responsive, and fun.
+        </p>
+        
+        <div style="width: 90%; height: 1px; background-color: #444; margin: 20px auto;"></div>
+      </div>
+    </div>
+  </body>
+</html>
+
