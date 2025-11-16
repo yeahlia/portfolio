@@ -104,6 +104,11 @@ let lastDirection = null;
 let lastScrollTime = 0;
 
 // ============= SCROLL ANIMATION ON MAIN SCREEN ==========================
+// Check if device is mobile - defined early so it can be used everywhere
+function isMobileDevice() {
+  return window.innerWidth <= 768;
+}
+
 // Projects to show when scrolling (in order)
 const scrollProjects = [
   { img: 'assets/thumbnails/thehollowchild.png', name: 'The Hollow Child', dataProject: 'the-hollow-child' },
@@ -126,9 +131,32 @@ if (bgBoxes.length > 0) {
       dataProject: box.getAttribute('data-project') || ''
     });
   });
+  
+  // On mobile, ensure images stay in original state and never change
+  if (isMobileDevice()) {
+    // Make sure all background boxes are in their original state
+    bgBoxes.forEach((box, index) => {
+      const img = box.querySelector('img');
+      const overlay = box.querySelector('.rectangle-overlay span');
+      
+      if (img && originalImageData[index]) {
+        // Force original image to stay
+        img.src = originalImageData[index].imgSrc;
+        if (overlay) {
+          overlay.textContent = originalImageData[index].overlayText;
+        }
+        if (box) {
+          box.setAttribute('data-project', originalImageData[index].dataProject);
+        }
+      }
+    });
+  }
 }
 
 function changeBackgroundImages(useProjects) {
+  // Never change background images on mobile - keep original state
+  if (isMobileDevice()) return;
+  
   bgBoxes.forEach((box, index) => {
     const img = box.querySelector('img');
     const overlay = box.querySelector('.rectangle-overlay span');
@@ -168,6 +196,9 @@ function changeBackgroundImages(useProjects) {
 }
 
 function applyScrollZoom(zoomIn) {
+  // Disable scroll zoom mechanism on mobile - allow normal scrolling
+  if (isMobileDevice()) return;
+  
   if (zoomIn) {
     // Change images when scrolling down
     changeBackgroundImages(true);
@@ -204,7 +235,10 @@ function applyScrollZoom(zoomIn) {
       s.style.pointerEvents = 'none';
     });
     
-    bgBoxes.forEach((box) => box.classList.add('active-hover'));
+    // Only add active-hover on desktop
+    if (!isMobileDevice()) {
+      bgBoxes.forEach((box) => box.classList.add('active-hover'));
+    }
   } else {
     // Reset name
     myName.classList.remove('scroll-scale', 'inactive');
@@ -242,8 +276,10 @@ function applyScrollZoom(zoomIn) {
     // Remove hover effects
     bgBoxes.forEach((box) => box.classList.remove('active-hover'));
     
-    // Restore original images when scrolling back up
-    changeBackgroundImages(false);
+    // Restore original images when scrolling back up (only on desktop)
+    if (!isMobileDevice()) {
+      changeBackgroundImages(false);
+    }
   }
 }
 
@@ -255,6 +291,12 @@ function isOnMainScreen() {
 window.addEventListener('wheel', (e) => {
   if (!isOnMainScreen()) return;
   
+  // Completely disable scroll zoom mechanism on mobile - allow normal scrolling
+  if (isMobileDevice()) {
+    e.stopPropagation();
+    return;
+  }
+  
   const scrollDown = e.deltaY > 0;
   const newDirection = scrollDown ? 'down' : 'up';
   
@@ -262,7 +304,7 @@ window.addEventListener('wheel', (e) => {
     applyScrollZoom(scrollDown);
     lastDirection = newDirection;
   }
-});
+}, { passive: false });
 
 // ============= STAR PULSE ANIMATION ===========================
 function animatePulse(el, speed = 3000, scale = 1.2, phaseOffset = 0) {
@@ -294,8 +336,12 @@ stars.forEach((star) => {
 });
 
 // ============= FEATURED PROJECT CLICKS ===========================
+// Only enable background box clicks on desktop
 bgBoxes.forEach((box) => {
   box.addEventListener('click', () => {
+    // Disable clicks on mobile - background boxes should not be interactive
+    if (isMobileDevice()) return;
+    
     const target = box.getAttribute('data-project');
     
     if (target) {
@@ -309,6 +355,18 @@ bgBoxes.forEach((box) => {
       }
       
       navigateToPage(`projects/${projectFolder}/${target}.html`);
+    }
+  });
+});
+
+// ============= MOBILE FEATURED WORK CLICKS ===========================
+const mobileFeaturedCards = document.querySelectorAll('.mobile-featured-card');
+mobileFeaturedCards.forEach((card) => {
+  card.addEventListener('click', () => {
+    const target = card.getAttribute('data-project');
+    
+    if (target) {
+      navigateToPage(`projects/sound-design/${target}.html`);
     }
   });
 });

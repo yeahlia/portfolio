@@ -11,9 +11,17 @@ html {
   color: #f0f0f0; /* light text for entire site */
 }
 
-/* Only apply overflow hidden to home page */
+/* Only apply overflow hidden to home page on desktop */
 body.home-page {
   overflow: hidden; /* prevents scrolling on parts i dont want them to see */
+}
+
+/* Allow scrolling on mobile */
+@media (max-width: 768px) {
+  body.home-page {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 }
 
 /* Prevent horizontal scrolling on content pages, allow vertical */
@@ -34,18 +42,17 @@ body.content-page:has(.contact-container) .content-page {
   max-height: 100vh;
 }
 
-/* Allow scrolling on contact page for smaller screens */
+/* Disable scrolling on contact page for all screens including mobile */
 @media (max-width: 768px) {
   body.content-page:has(.contact-container) {
-    overflow-y: auto;
-    height: auto;
+    overflow: hidden;
+    height: 100vh;
   }
 
   body.content-page:has(.contact-container) .content-page {
-    overflow: visible;
-    height: auto;
-    min-height: 100vh;
-    max-height: none;
+    overflow: hidden;
+    height: 100vh;
+    max-height: 100vh;
   }
 }
 
@@ -265,6 +272,14 @@ main#main-screen {
   background-color: #121212; /* matches background */
 }
 
+/* On mobile, allow main screen to scroll naturally */
+@media (max-width: 768px) {
+  main#main-screen {
+    min-height: 100vh;
+    height: auto;
+  }
+}
+
 /* ============================ BACKGROUND RECTANGLES ============================================ */
 .background-container {
   /* container for background images */
@@ -329,6 +344,19 @@ main#main-screen {
   /* enable interaction when scrolled */
   cursor: pointer;
   pointer-events: auto;
+}
+
+/* Disable all background box interactions on mobile */
+@media (max-width: 768px) {
+  .background-box {
+    pointer-events: none !important;
+    cursor: default !important;
+  }
+  
+  .background-box.active-hover {
+    pointer-events: none !important;
+    cursor: default !important;
+  }
 }
 
 .background-box.active-hover:hover img {
@@ -396,7 +424,9 @@ main#main-screen {
   .subtitle-left,
   .subtitle-right {
     bottom: 15%;
-    font-size: 1rem;
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    line-height: 1.4;
   }
   
   .subtitle-left {
@@ -437,7 +467,9 @@ main#main-screen {
   .subtitle-left,
   .subtitle-right {
     bottom: 12%;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    padding: 10px 15px;
+    line-height: 1.5;
   }
   
   .subtitle-left {
@@ -600,35 +632,10 @@ main#main-screen {
   }
 }
 
+/* Hide stars on mobile */
 @media (max-width: 768px) {
-  .star img {
-    width: 60px !important;
-  }
-  
-  .star1 {
-    width: 120px !important;
-  }
-  .star2 {
-    width: 100px !important;
-  }
-  .star3 {
-    width: 150px !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .star img {
-    width: 40px !important;
-  }
-  
-  .star1 {
-    width: 80px !important;
-  }
-  .star2 {
-    width: 70px !important;
-  }
-  .star3 {
-    width: 100px !important;
+  .star {
+    display: none !important;
   }
 }
 
@@ -833,6 +840,45 @@ main#main-screen {
   margin-bottom: 0;
 }
 
+/* Mobile styles for about page */
+@media (max-width: 768px) {
+  .about-section-title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+  }
+  
+  .about-text-extended {
+    max-width: 98%;
+    padding: 0 40px 60px 40px;
+    margin: 80px auto 0;
+  }
+  
+  .about-text-extended p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-section-title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+  }
+  
+  .about-text-extended {
+    max-width: 100%;
+    padding: 0 20px 60px 20px;
+    margin: 80px auto 0;
+  }
+  
+  .about-text-extended p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+}
+
 /* ==================== CONTACT SECTION ===================================== */
 #contact h1 {
   /* contact title*/
@@ -858,23 +904,27 @@ main#main-screen {
 
 @media (max-width: 768px) {
   .contact-container {
-    gap: 15px;
-    padding: 0 15px;
+    flex-direction: column;
+    gap: 30px;
+    padding: 0 20px 40px 20px;
     height: auto;
     max-height: none;
     min-height: auto;
     overflow: visible;
+    align-items: stretch;
   }
 }
 
 @media (max-width: 480px) {
   .contact-container {
-    gap: 10px;
-    padding: 0 10px;
+    flex-direction: column;
+    gap: 25px;
+    padding: 0 15px 30px 15px;
     height: auto;
     max-height: none;
     min-height: auto;
     overflow: visible;
+    align-items: stretch;
   }
 }
 
@@ -888,12 +938,15 @@ main#main-screen {
   .contact-info {
     min-width: 100%;
     width: 100%;
+    order: 1;
   }
 }
 
 @media (max-width: 480px) {
   .contact-info {
     min-width: 100%;
+    width: 100%;
+    order: 1;
   }
 }
 
@@ -965,13 +1018,16 @@ main#main-screen {
   .contact-form {
     min-width: 100%;
     width: 100%;
+    order: 2;
   }
 }
 
 @media (max-width: 480px) {
   .contact-form {
     min-width: 100%;
+    width: 100%;
     gap: 12px;
+    order: 2;
   }
 }
 
@@ -993,6 +1049,13 @@ main#main-screen {
   border: 1px solid #444;
   font-size: 1rem;
   font-family: "IBM Plex Serif", serif;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-form textarea {
+  min-height: 120px;
+  resize: vertical;
 }
 
 .contact-form button {
@@ -1082,6 +1145,7 @@ button.shake {
   #interactive-design h1 {
     font-size: 2.5rem;
     margin-bottom: 30px;
+    margin-top: 60px;
   }
 }
 
@@ -1092,6 +1156,7 @@ button.shake {
   #interactive-design h1 {
     font-size: 2rem;
     margin-bottom: 20px;
+    margin-top: 50px;
   }
 }
 
@@ -1828,16 +1893,23 @@ button.shake {
   .content-page h1 {
     font-size: 2.5rem;
     margin-bottom: 30px;
+    margin-top: 60px;
   }
 
   .contact-info p {
     font-size: 1rem;
-    margin-bottom: 15px;
+    margin-bottom: 35px;
+    text-align: left;
   }
 
   .contact-list li {
     font-size: 1rem;
     margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .contact-list li span {
+    word-break: break-word;
   }
 
   .floating-menu {
@@ -1854,11 +1926,12 @@ button.shake {
   .content-page h1 {
     font-size: 2rem;
     margin-bottom: 20px;
+    margin-top: 50px;
   }
 
   .contact-info p {
     font-size: 0.95rem;
-    margin-bottom: 12px;
+    margin-bottom: 30px;
   }
 
   .contact-info p .contact-intro {
@@ -1870,6 +1943,11 @@ button.shake {
     font-size: 0.9rem;
     margin-bottom: 8px;
     gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  .contact-list li span {
+    word-break: break-word;
   }
 
   .contact-icon {
@@ -1890,10 +1968,132 @@ button.shake {
 
   .name-fields {
     gap: 8px;
+  }
 
   .floating-menu {
     right: 15px;
     top: 15px;
   }
 }
+
+/* ============================ MOBILE FEATURED WORK SECTION ===================================== */
+.mobile-featured-work {
+  display: none; /* Hidden on desktop */
+  width: 100%;
+  padding: 60px 20px;
+  background-color: #121212;
+}
+
+.mobile-featured-title {
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-size: 2rem;
+  color: #9a9580;
+  text-align: center;
+  margin-bottom: 40px;
+  font-weight: 400;
+}
+
+.mobile-featured-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.mobile-featured-card {
+  background: rgba(26, 26, 26, 0.9);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border: 2px solid transparent;
+}
+
+.mobile-featured-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  border-color: #333;
+}
+
+.mobile-featured-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.mobile-featured-card h3 {
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-size: 1.2rem;
+  color: #f0f0f0;
+  text-align: center;
+  padding: 20px;
+  margin: 0;
+  font-weight: 400;
+}
+
+.mobile-browse-links {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.mobile-browse-links p {
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-size: 0.9rem;
+  color: #9a9580;
+  line-height: 1.6;
+}
+
+.mobile-browse-links a {
+  color: #f0f0f0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.mobile-browse-links a:hover {
+  color: #9a9580;
+}
+
+.mobile-browse-links em {
+  font-style: italic;
+}
+
+/* Show mobile featured work on mobile devices */
+@media (max-width: 768px) {
+  .mobile-featured-work {
+    display: block;
+  }
+  
+  /* Hide desktop featured work elements on mobile */
+  .featured-work-text,
+  .featured-work-subtitle {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-featured-work {
+    padding: 40px 15px;
+  }
+  
+  .mobile-featured-title {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+  
+  .mobile-featured-grid {
+    gap: 20px;
+  }
+  
+  .mobile-featured-card h3 {
+    font-size: 1rem;
+    padding: 15px;
+  }
+  
+  .mobile-browse-links p {
+    font-size: 0.8rem;
+  }
 }
