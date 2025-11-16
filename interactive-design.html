@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Media - Lia Aguilar</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/script.js" defer></script>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Lora:ital,wght@0,400..700;1,400..700&family=Notable&family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Special+Gothic+Expanded+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="content-page interactive-design-page">
+    <!-- Floating Hamburger Menu -->
+    <div class="floating-menu">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay">
+      <div class="menu-content">
+        <ul class="menu-links">
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="sound-design.html">SOUND DESIGN</a></li>
+          <li><a href="interactive-design.html">INTERACTIVE MEDIA</a></li>
+          <li><a href="all-works.html">ALL WORKS</a></li>
+          <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Interactive Design Page Content -->
+    <div class="content-page">
+      <h1>INTERACTIVE MEDIA</h1>
+      <p style="font-family: 'Special Gothic Expanded One', sans-serif; font-size: 0.7rem; color: #9a9580; text-align: center; margin-top: -20px; margin-bottom: 40px; font-style: italic;">*NOTE: MOST WEBSITES DON'T FUNCTION CORRECTLY ON SMALLER SCREENS*</p>
+
+      <div class="carousel-container">
+        <button class="arrow left-arrow">
+          <svg
+            class="arrow-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M11.7071 4.29289C12.0976 4.68342 12.0976 5.31658 11.7071 5.70711L6.41421 11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H6.41421L11.7071 18.2929C12.0976 18.6834 12.0976 19.3166 11.7071 19.7071C11.3166 20.0976 10.6834 20.0976 10.2929 19.7071L3.29289 12.7071C3.10536 12.5196 3 12.2652 3 12C3 11.7348 3.10536 11.4804 3.29289 11.2929L10.2929 4.29289C10.6834 3.90237 11.3166 3.90237 11.7071 4.29289Z"
+            />
+          </svg>
+        </button>
+
+        <div class="carousel-track">
+          <!-- Word Doc Synth -->
+          <div class="carousel-slide" data-target="word-doc-synth">
+            <div class="project-image">
+              <img
+                src="assets/thumbnails/worddocsynth.png"
+              />
+            </div>
+            <div class="project-text">
+              <h2>Word Doc Synth</h2>
+              <p>
+                A word processor reimagined as a playable musical instrument. Letters trigger notes, words form chords and formatting changes the timbre.
+              </p>
+            </div>
+          </div>
+
+          <!-- Beneath the Surface -->
+          <div class="carousel-slide" data-target="beneath-the-surface">
+            <div class="project-image">
+              <img
+                src="assets/thumbnails/beneaththesurface.png"
+              />
+            </div>
+            <div class="project-text">
+              <h2>Beneath the Surface</h2>
+              <p>
+                An interactive scrolly-telling website that visualizes the journey of a discarded bottle from the shoreline to the ocean depths.
+              </p>
+            </div>
+          </div>
+
+          <!-- Music Helper -->
+          <div class="carousel-slide" data-target="music-helper">
+            <div class="project-image">
+              <img
+                src="assets/thumbnails/musichelper.png"
+              />
+            </div>
+            <div class="project-text">
+              <h2>Music Helper 2000</h2>
+              <p>
+                A web-based creative tool that listens to live audio, detects the musical key and visualizes related notes on a color-coded fretboard.
+              </p>
+            </div>
+          </div>
+
+          <!-- CUTE! -->
+          <div class="carousel-slide" data-target="cute">
+            <div class="project-image">
+              <img
+                src="assets/thumbnails/cute.png"
+              />
+            </div>
+            <div class="project-text">
+              <h2>CUTE!</h2>
+              <p>
+                An interactive sketch that invites users to grow, pop and create bubbles in a soft pastel world with musical notes and playful interactions.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <button class="arrow right-arrow">
+          <svg
+            class="arrow-icon flip"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M11.7071 4.29289C12.0976 4.68342 12.0976 5.31658 11.7071 5.70711L6.41421 11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H6.41421L11.7071 18.2929C12.0976 18.6834 12.0976 19.3166 11.7071 19.7071C11.3166 20.0976 10.6834 20.0976 10.2929 19.7071L3.29289 12.7071C3.10536 12.5196 3 12.2652 3 12C3 11.7348 3.10536 11.4804 3.29289 11.2929L10.2929 4.29289C10.6834 3.90237 11.3166 3.90237 11.7071 4.29289Z"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div class="carousel-indicators">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+
+      <!-- Skills & Knowledge Section -->
+      <div class="skills-section">
+        <h2>SKILLS & KNOWLEDGE</h2>
+        <div class="skills-grid">
+          <div class="skill-column">
+            <ul>
+              <li>• Creative Coding</li>
+              <li>• p5.js</li>
+            </ul>
+          </div>
+          <div class="skill-column">
+            <ul>
+              <li>• Interactive Art</li>
+              <li>• Web Development</li>
+            </ul>
+          </div>
+          <div class="skill-column">
+            <ul>
+              <li>• Digital Media</li>
+              <li>• User Experience</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Projects Grid Section -->
+    <div class="projects-grid-section">
+      <h2 class="grid-section-title">ALL INTERACTIVE MEDIA PROJECTS</h2>
+      <div class="projects-grid">
+        <!-- Word Doc Synth -->
+        <div class="project-card" onclick="window.location.href='projects/interactive-media/word-doc-synth.html'">
+          <div class="project-image">
+            <img src="assets/thumbnails/worddocsynth.png" alt="Word Doc Synth">
+          </div>
+          <div class="project-content">
+            <h3>Word Doc Synth</h3>
+            <p>A word processor reimagined as a playable musical instrument. Letters trigger notes, words form chords and formatting changes the timbre.</p>
+          </div>
+        </div>
+
+        <!-- Beneath the Surface -->
+        <div class="project-card" onclick="window.location.href='projects/interactive-media/beneath-the-surface.html'">
+          <div class="project-image">
+            <img src="assets/thumbnails/beneaththesurface.png" alt="Beneath the Surface">
+          </div>
+          <div class="project-content">
+            <h3>Beneath the Surface</h3>
+            <p>An interactive scrolly-telling website that visualizes the journey of a discarded bottle from the shoreline to the ocean depths.</p>
+          </div>
+        </div>
+
+        <!-- Music Helper -->
+        <div class="project-card" onclick="window.location.href='projects/interactive-media/music-helper.html'">
+          <div class="project-image">
+            <img src="assets/thumbnails/musichelper.png" alt="Music Helper 2000">
+          </div>
+          <div class="project-content">
+            <h3>Music Helper 2000</h3>
+            <p>A web-based creative tool that listens to live audio, detects the musical key and visualizes related notes on a color-coded fretboard.</p>
+          </div>
+        </div>
+
+        <!-- CUTE! -->
+        <div class="project-card" onclick="window.location.href='projects/interactive-media/cute.html'">
+          <div class="project-image">
+            <img src="assets/thumbnails/cute.png" alt="CUTE!">
+          </div>
+          <div class="project-content">
+            <h3>CUTE!</h3>
+            <p>An interactive sketch that invites users to grow, pop and create bubbles in a soft pastel world with musical notes and playful interactions.</p>
+          </div>
+        </div>
+
+        <!-- Dreamwire -->
+        <div class="project-card" onclick="window.location.href='projects/interactive-media/dreamwire.html'">
+          <div class="project-image">
+            <img src="assets/thumbnails/dreamwire.png" alt="Dreamwire">
+          </div>
+          <div class="project-content">
+            <h3>Dreamwire</h3>
+            <p>An immersive, browser-based music video player with custom controls and interactive fan features.</p>
+          </div>
+        </div>
+
+        <!-- Chaos -->
+        <div class="project-card" onclick="window.location.href='projects/interactive-media/chaos.html'">
+          <div class="project-image">
+            <img src="assets/thumbnails/chaos.png" alt="Chaos">
+          </div>
+          <div class="project-content">
+            <h3>Chaos</h3>
+            <p>An evolving generative artwork simulating an organic branching system that continuously grows, decays and regrows.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+    <script>
+      // Animate the scroll indicator dots visibility
+      const dot1 = document.querySelector('.dot1');
+      const dot2 = document.querySelector('.dot2');
+      const dot3 = document.querySelector('.dot3');
+      let currentStep = 1;
+      
+      setInterval(() => {
+        // Hide all dots first
+        dot1.style.opacity = '0';
+        dot2.style.opacity = '0';
+        dot3.style.opacity = '0';
+        
+        // Show the appropriate number of dots
+        if (currentStep >= 1) dot1.style.opacity = '1';
+        if (currentStep >= 2) dot2.style.opacity = '1';
+        if (currentStep >= 3) dot3.style.opacity = '1';
+        
+        currentStep = (currentStep % 3) + 1; // 1, 2, 3, 1, 2, 3...
+      }, 500);
+    </script>
+  </body>
+</html>

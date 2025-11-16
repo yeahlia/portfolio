@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lia Aguilar Portfolio</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/script.js" defer></script>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Lora:ital,wght@0,400..700;1,400..700&family=Notable&family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Special+Gothic+Expanded+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="home-page">
+    <!-- Simple navigation for home page -->
+    <div class="home-nav">
+      <button class="home-menu-toggle" id="homeMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay">
+      <div class="menu-content">
+        <ul class="menu-links">
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="sound-design.html">SOUND DESIGN</a></li>
+          <li><a href="interactive-design.html">INTERACTIVE DESIGN</a></li>
+          <li><a href="all-works.html">ALL WORKS</a></li>
+          <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- main screen -->
+    <main id="main-screen">
+      <div class="background-container">
+        <div class="background-box" data-project="project1">
+          <img
+            src="https://i.pinimg.com/736x/8d/cc/26/8dcc26befe24616bdf09fd02cdf24ea9.jpg"
+          />
+          <div class="rectangle-overlay"><span>PROJECT ONE</span></div>
+        </div>
+        <div class="background-box" data-project="project2">
+          <img
+            src="https://i.pinimg.com/736x/67/88/40/678840ba1855b66017aeeb32d99f654d.jpg"
+          />
+          <div class="rectangle-overlay"><span>PROJECT TWO</span></div>
+        </div>
+        <div class="background-box" data-project="project3">
+          <img
+            src="https://i.pinimg.com/736x/52/f7/b9/52f7b9482f1f94f3946d650a6359fc0b.jpg"
+          />
+          <div class="rectangle-overlay"><span>PROJECT THREE </span></div>
+        </div>
+        <div class="background-box" data-project="project4">
+          <img
+            src="https://i.pinimg.com/736x/03/7b/53/037b53510b686c0f1465640f3b749ca9.jpg"
+          />
+          <div class="rectangle-overlay"><span>PROJECT FOUR</span></div>
+        </div>
+      </div>
+
+      <!-- designer name -->
+      <h1 class="my-name">LIA AGUILAR</h1>
+
+      <!-- subtitle text -->
+      <div class="subtitle-left">SOUND DESIGNER<br>& DEVELOPER</div>
+      <div class="subtitle-right">CREATING IMMERSIVE<br>EXPERIENCES</div>
+
+      <!-- featured work text (appears when stars fade) -->
+      <div class="featured-work-text">
+        <h2>FEATURED WORK</h2>
+      </div>
+
+      <!-- featured work subtitle (appears when stars fade) -->
+      <div class="featured-work-subtitle">
+        <span class="browse-line">OR BROWSE BY <a href="sound-design.html" class="project-link"><em>&nbsp;&nbsp;SOUND DESIGN&nbsp;&nbsp;</em></a></span>
+        <span class="projects-line">OR <a href="interactive-design.html" class="project-link"><em>&nbsp;&nbsp;INTERACTIVE MEDIA&nbsp;&nbsp;</em></a> PROJECTS</span>
+      </div>
+
+      <!-- scroll indicator -->
+      <div class="main-scroll-indicator">
+        <span>SCROLL DOWN</span>
+      </div>
+
+      <!-- animated stars -->
+      <div
+        class="star"
+        style="
+          top: 33%;
+          left: 7%;
+          transform: translate(-50%, -50%) rotate(70deg);
+        "
+      >
+        <img src="assets/star.svg" class="star1" />
+      </div>
+      <div
+        class="star"
+        style="
+          top: 35%;
+          right: -2%;
+          transform: translate(-50%, -50%) rotate(10deg);
+        "
+      >
+        <img src="assets/star.svg" class="star2" />
+      </div>
+      <div
+        class="star"
+        style="
+          bottom: -30%;
+          left: 60%;
+          transform: translate(-50%, -50%) rotate(45deg);
+        "
+      >
+        <img src="assets/star.svg" class="star3" />
+      </div>
+    </main>
+  </body>
+</html>
