@@ -347,10 +347,16 @@ bgBoxes.forEach((box) => {
     if (target) {
       scrollLocked = true;
       // Determine the correct folder based on current page
+      // Check both pathname and href for better compatibility
       const currentPath = window.location.pathname;
+      const currentHref = window.location.href;
       let projectFolder = 'sound-design'; // default
       
-      if (currentPath.includes('interactive-design.html')) {
+      // More robust check for interactive design page
+      if (currentPath.includes('interactive-design.html') || 
+          currentHref.includes('interactive-design.html') ||
+          currentPath.includes('interactive-design') ||
+          currentHref.includes('interactive-design')) {
         projectFolder = 'interactive-media';
       }
       
@@ -485,10 +491,16 @@ allSlides.forEach((slide) => {
     if (!target) return;
     
     // Determine the correct folder based on current page
+    // Check both pathname and href for better compatibility
     const currentPath = window.location.pathname;
+    const currentHref = window.location.href;
     let projectFolder = 'sound-design'; // default
     
-    if (currentPath.includes('interactive-design.html')) {
+    // More robust check for interactive design page
+    if (currentPath.includes('interactive-design.html') || 
+        currentHref.includes('interactive-design.html') ||
+        currentPath.includes('interactive-design') ||
+        currentHref.includes('interactive-design')) {
       projectFolder = 'interactive-media';
     }
     
